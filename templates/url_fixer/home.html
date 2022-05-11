@@ -1,0 +1,49 @@
+{% extends 'url_fixer/base.html' %}
+
+{% block body %}
+
+<div class="container">
+  <div class="card mt-5">
+    <div class="card-header text-center py-3">
+      <h1>Mother of all URL Shortner Application <i class="fas fa-link px-2"></i></h1>
+    </div>
+    <div class="px-3 py-4">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="row g-1">
+            <h3>Generate a random short url</h3>
+          <div class="col-12">{{form.long_url}}</div>
+        </div>
+          <br>
+          <h3>Or generate a custom url</h3>
+          <p>make sure that the url can only have:</p>
+          <ul>
+              <li>letters</li>
+              <li>digits</li>
+              <li>underscore</li>
+          </ul>
+          <div class="col-7">{{form.custom_url}}</div><br>
+          <div style="text-align: center">
+          <button class="btn btn-success btn-lg w-25" type="submit">
+              Shorten
+            </button>
+          </div>
+      </form>
+    </div>
+  </div>
+  {% if errors %}
+  <div class="alert alert-danger mt-4" role="alert">
+    <p>{{errors}}</p>
+  </div>
+  {% endif %}
+
+  {% if new_url %}
+
+  <div class="mx-auto text-center mt-5">
+    <h2 class="text-danger">Your shortened Url</h2>
+    <p class="" style="font-size: large">{{new_url}}</p>
+    <p><span class="text-danger">Previous URL:</span> {{long_url}}</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock body %}
